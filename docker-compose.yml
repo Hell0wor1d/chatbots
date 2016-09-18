@@ -1,0 +1,21 @@
+version: '2'
+services:
+    web:
+        build: .
+        ports:
+            - "8080:80"
+        restart: always
+    #   volumes:
+    #        - flask/:/var/www/flask
+        environment:
+            SERVER_NAME: bots.kev7n.com
+    #        MAIL_SERVER: smtp.mail.com
+    #        MAIL_PORT: 587
+    #        MAIL_TLS: "true"
+    #        MAIL_USER: admin
+    #        MAIL_PASS: secret-password
+    #        MAIL_SENDER: admin@example.com
+    #        CREATE_FLASK_DB: "true"
+    #        USER_MAIL: contact@example.com
+    #        PROJECT_NAME: Flask Template
+
