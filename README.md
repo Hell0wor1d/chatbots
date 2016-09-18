@@ -2,10 +2,9 @@
 
 ###Backgroud
 This is a ChatBots prototype, which can provide Self-Service to help learners get the course plan.
+If any questions, you can touch me. root#kev7n.com, pls replace # to @
 
 ###Tech Stack
-
-Author: root#kev7n.com, pls replace # to @. If any questions, you can touch me. :D
 
 DEVELOPMENT STACK|Tool
 ---|---|
@@ -22,9 +21,9 @@ HTTP Server|Nginx / uwsgi|
 
 ##Playground
 
-##How To Deployment
+###How To Deployment
 
-###Docker
+####Docker
 ```
 docker build -t docker-chatbots .
 ```
@@ -39,9 +38,9 @@ docker exec -i -t bots /bin/bash
 uwsgi --http-socket :9090 --plugin python --wsgi-file wsgi.py --callable app
 
 
-##How To Development and Debugging
+###How To Development and Debugging
 
-###Generate assets
+####Generate assets
 
 In this project, less and pug were used to generate css and html. if any changes, the assets needs to be synced to app assets folder.
 
