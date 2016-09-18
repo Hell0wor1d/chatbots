@@ -1,9 +1,11 @@
 ##Inroduction
 
 ###Backgroud
-This is a ChatBots prototype for Wall Street English Online, Which can provide Self-Service to get the personabled course plan for our learners.
+This is a ChatBots prototype, which can provide Self-Service to help learners get the course plan.
 
 ###Tech Stack
+
+Author: root#kev7n.com, pls replace # to @. If any questions, you can touch me. :D
 
 DEVELOPMENT STACK|Tool
 ---|---|
@@ -20,6 +22,8 @@ HTTP Server|Nginx / uwsgi|
 
 ##Playground
 
+##How To Deployment
+
 ###Docker
 ```
 docker build -t docker-chatbots .
@@ -35,7 +39,7 @@ docker exec -i -t bots /bin/bash
 uwsgi --http-socket :9090 --plugin python --wsgi-file wsgi.py --callable app
 
 
-##How to development and debugging
+##How To Development and Debugging
 
 ###Generate assets
 
