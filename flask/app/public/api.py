@@ -31,23 +31,22 @@ class Chat(Resource):
     bots_settings = BotsConfig
     bots = ChatBot(bots_settings.NAME)
 
-    parser = reqparse.RequestParser()
-    # comes from user's question.
-    parser.add_argument('question')
-
     def __init__(self):
         print('api init.')
 
     def post(self):
-        args = self.parser.parse_args()
+
+        parser = reqparse.RequestParser()
+        # comes from user's message and qid.
+        parser.add_argument('question')
+        parser.add_argument('qid')
+        args = parser.parse_args()
         question = args['question']
+        qid = args['qid']
         mode = session.get('mode')
 
-        if mode is None or question == '1':
-            mode = Mode.Normal
-        elif question == '2':
+        if question == '1':
             mode = Mode.Planning
-            session['q_list'] = {}
         session['mode'] = mode
         if question == '[hi]':
             resp_message = self.bots_settings.WELCOME
@@ -59,27 +58,20 @@ class Chat(Resource):
 
         if mode == Mode.Planning:
             q_list = session.get('q_list')
-            q_id = 0
-            if q_list is None:
-
-                q_list = {}
-                session['q_list'] = q_list
-            q_list_len = len(q_list)
-            if q_list_len > 0:
-                q_id = q_list_len
-            if q_id >= len(self.bots_settings.QUESTION):
-                resp_message = 'You have answered all the questions. thank you! Bye!'
+            if q_list is None or 0 >= len(q_list):
                 session['mode'] = Mode.Normal
+                resp_message = 'You have answered all the questions. Your personalized course plan will be generated... Bye!'
             else:
-                resp_message = self.bots_settings.QUESTION[str(q_id)]
-                session['q_list'][str(q_id)] = ''
-                if question != '2':
-                    #TODO need to fix the question and answers mapping issue.
-                    session['q_list'][str(q_id)] = question
+                l = len(q_list)
+                id = l-1
+                resp_message = q_list[id]
+                del q_list[id]
+
+                #return {'message': resp_message, 'mode': mode, 'qid' : q_id }, 201
         else:
             resp_message = self.bots.get_response(question).text
-            if resp_message == '':
-                resp_message = self.bots_settings.ERROR
+        if resp_message == '':
+            resp_message = self.bots_settings.ERROR
 
         return {'message': resp_message, 'mode': mode}, 201
 

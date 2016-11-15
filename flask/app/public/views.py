@@ -21,6 +21,7 @@
 '''Public section, including homepage and signup.'''
 from flask import (Blueprint, session, request, render_template, make_response)
 import uuid
+from settings import BotsConfig
 
 blueprint = Blueprint('public', __name__, static_folder="../static")
 # home page
@@ -30,5 +31,8 @@ def basic_pages(**kwargs):
     if sid is None:
         session['sid'] = str(uuid.uuid1())
         session['mode'] = 'NORMAL'
+
+        session['q_list'] = BotsConfig.QUESTION
+
     resp = make_response(render_template("index.html"))
     return resp

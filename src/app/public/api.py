@@ -45,11 +45,8 @@ class Chat(Resource):
         qid = args['qid']
         mode = session.get('mode')
 
-        if mode is None or question == '1':
-            mode = Mode.Normal
-        elif question == '2':
+        if question == '1':
             mode = Mode.Planning
-            session['q_list'] = {}
         session['mode'] = mode
         if question == '[hi]':
             resp_message = self.bots_settings.WELCOME
@@ -61,24 +58,18 @@ class Chat(Resource):
 
         if mode == Mode.Planning:
             q_list = session.get('q_list')
-            q_id = 0
-            if q_list is None:
-                q_list = {}
-                session['q_list'] = q_list
-
-            q_list_len = len(q_list)
-            if q_list_len > 0:
-                q_id = q_list_len
-                session['q_list'][qid] = question
-
-            if q_id >= len(self.bots_settings.QUESTION):
-                resp_message = 'You have answered all the questions. thank you! Bye!'
+            if q_list is None or 0 >= len(q_list):
                 session['mode'] = Mode.Normal
+                resp_message = 'You have answered all the questions. Your personalized course plan will be generated... Bye!'
             else:
-                resp_message = self.bots_settings.QUESTION[str(q_id)]
-            return {'message': resp_message, 'mode': mode, 'qid' : q_id }, 201
+                l = len(q_list)
+                id = l-1
+                resp_message = q_list[id]
+                del q_list[id]
 
-        resp_message = self.bots.get_response(question).text
+                #return {'message': resp_message, 'mode': mode, 'qid' : q_id }, 201
+        else:
+            resp_message = self.bots.get_response(question).text
         if resp_message == '':
             resp_message = self.bots_settings.ERROR
 

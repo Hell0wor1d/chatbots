@@ -60,9 +60,9 @@ class BotsConfig():
 
     # bots questions
     QUESTION = {
-        '0': 'Describe your goals for learning English?',
-        '1': 'How many hours per week can you commit to studying English?',
-        '2': 'What are some of the challenges that you have faced in learning English?',
+        0: 'Describe your goals for learning English?',
+        1: 'How many hours per week can you commit to studying English?',
+        2: 'What are some of the challenges that you have faced in learning English?',
     }
 
     CONVERSATION = [
