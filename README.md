@@ -6,7 +6,7 @@ If any questions, you can touch me. root#kev7n.com, pls replace # to @
 
 ###Tech Stack
 
-DEVELOPMENT STACK|Tool
+DEVELOPMENT STACK|Tools
 ---|---|
 Server OS|CENTOS 7.2 / Ubuntu|
 Containerization / Scale Down Deployments|Docker|
