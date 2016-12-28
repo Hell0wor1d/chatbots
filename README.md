@@ -21,7 +21,7 @@ HTTP Server|Nginx / uwsgi|
 
 ##Playground
 
-###How To Deployment
+###How To Deploy
 
 ####Docker
 ```
@@ -38,7 +38,7 @@ docker exec -i -t bots /bin/bash
 uwsgi --http-socket :9090 --plugin python --wsgi-file wsgi.py --callable app
 
 
-###How To Development and Debugging
+###How To Debug
 
 ####Generate assets
 
