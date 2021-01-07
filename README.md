@@ -20,7 +20,7 @@ HTTP Server|Nginx / uwsgi|
 
 ## Playground
 
-### How To Deploy
+### Deployment
 
 #### Docker
 ```
